@@ -6,7 +6,8 @@ class Details extends Component {
 
 
   render() {
-
+console.log(this.props.user);
+console.log(this.props.myaccountrecipedetail);
     if (this.props.detailRecipe) {
       const ingredients = this.props.detailRecipe.ingredients.map((item, i) => {
         return (
@@ -30,7 +31,7 @@ class Details extends Component {
             <li>Ingredients: {ingredients ? ingredients : "None"}</li>
             <li>healthLabels: {healthLabels}</li>
             <div>
-              {((this.props.user && this.props.myaccountrecipedetail)) ? null : <button onClick={() => this.props.addRecipeActionCallback(this.props.detailRecipe)}>Add Recipe</button>}
+              {((this.props.user && this.props.myaccountrecipedetail) || !(this.props.user)) ? null: <button onClick={() => this.props.addRecipeActionCallback(this.props.detailRecipe)}>Add Recipe</button> }
             </div>
           </ul>
         </div>

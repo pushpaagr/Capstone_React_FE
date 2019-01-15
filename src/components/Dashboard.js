@@ -64,6 +64,15 @@ class Dashboard extends Component {
       const user = result.user;
       this.setState({
         user: user,
+        result: [],
+        query: "",
+        detailRecipe: "",
+        seedetail: false,
+        searchrecipe: false,
+        myrecipe: false,
+        showhome: false,
+        indatabase: false,
+        myaccountrecipedetail: false,
 
       });
     });
