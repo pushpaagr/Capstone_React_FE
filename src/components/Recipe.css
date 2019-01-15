@@ -1,0 +1,20 @@
+
+.recipe-container {
+  /* border-style: solid; */
+  padding: 25px 50px 75px 100px;
+
+}
+
+.item-list_container {
+  border-style: solid;
+  border-color: green;
+}
+
+.item-list_container .item__button{
+  border-style: solid;
+  border-color: red;
+}
+
+ul {
+  list-style-type: none;
+}

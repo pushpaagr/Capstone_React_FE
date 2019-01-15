@@ -1,0 +1,20 @@
+.navbar-navbar{
+  /* border: 2px solid green; */
+}
+
+
+.navbar-buttons {
+  display:flex;
+  /* border: 2px solid pink; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.div-outer-nav {
+  /* border: 2px solid red; */
+
+}
