@@ -4,30 +4,76 @@ import "./Recipe.css";
 import axios from 'axios';
 import { Card, CardImg, CardBody,
   CardTitle, Button } from 'reactstrap';
+  import Calendar from 'react-calendar';
 
+// onClick={this.props.addRecipeActionCallback}
 
   class Recipe extends Component {
 
+    state = {
+      date: new Date(),
+      calendarvisible: false,
+    }
+
+    onChange = date => {
+      this.setState({
+          date,
+          calendarvisible: false
+        })
+      // console.log(date);
+
+      this.props.addRecipeActionCallback()
+
+      // do something with google calendar + date
+    }
+
+    toggleCalendar = () => {
+      // console.log("in toggle");
+      this.setState({
+        calendarvisible: !(this.state.calendarvisible),
+      })
+    }
+
+    renderAddButton() {
+      // console.log(this.state.calendarvisible);
+      if (!this.props.user) return null
+
+      return (
+        <div>
+          <Button onClick={this.toggleCalendar}
+            className="item__button"
+          >
+            Add
+          </Button>
+          {this.state.calendarvisible && <Calendar
+          onChange={this.onChange}
+          value={this.state.date}
+        />}
+        </div>
+      )
+    }
 
     render () {
       return(
         <div className="single-recipe">
-            <Card>
-              <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
-              <CardBody>
-                <CardTitle>{this.props.label}</CardTitle>
-                {this.props.user ?
-                  <Button
-                    onClick={() => this.props.addRecipeActionCallback()}
-                    className="item__button">Add</Button> :
-                    <p></p> }
-                      <Button  onClick={() => this.props.recipeDetailCallback()}
-                        className="item__button">Recipe Details </Button>
-                    </CardBody>
-                  </Card>
-              </div>
-            )
-          }
+          <Card>
+            <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
+            <CardBody>
+              <CardTitle>{this.props.label}</CardTitle>
+
+              {this.renderAddButton()}
+
+              <Button
+                onClick={() => this.props.recipeDetailCallback()}
+                className="item__button"
+              >
+                Recipe Details
+              </Button>
+            </CardBody>
+          </Card>
+        </div>
+      )
+    }
 
         }
         Recipe.propTypes = {
