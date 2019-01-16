@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../firebase.js';
 import axios from 'axios';
-import Home from './Home';
+import Carousel from './Carousel';
 import Recipes from './Recipes';
 import Myrecipes from './Myrecipes';
 import Details from './Details';
 import './Dashboard.css';
-
-import { Navbar,FormGroup, FormControl, Button, ButtonToolbar } from 'react-bootstrap';
+import { render } from "react-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Navbar, Button, ButtonToolbar, Alert } from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -70,7 +71,7 @@ class Dashboard extends Component {
         seedetail: false,
         searchrecipe: false,
         myrecipe: false,
-        showhome: false,
+        showhome: true,
         indatabase: false,
         myaccountrecipedetail: false,
 
@@ -91,7 +92,7 @@ class Dashboard extends Component {
         seedetail: false,
         searchrecipe: false,
         myrecipe: false,
-        showhome: false,
+        showhome: true,
         indatabase: false,
       });
       console.log(this.state.message);
@@ -263,11 +264,11 @@ class Dashboard extends Component {
 
 
 
-            <div>
+            <Alert  bsStyle="success">
               <p className={"status-bar__text"}>{this.state.message}</p>
-            </div>
+            </Alert>
 
-            {this.state.showhome ?   <Route path="/" exact component={Home} />: null}
+            {this.state.showhome ?   <Route path="/" exact component={Carousel} />: null}
 
 
 

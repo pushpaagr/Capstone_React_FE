@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
+  import "./Myrecipe.css";
+
+  class Myrecipe extends Component {
 
 
-class Myrecipe extends Component {
+    render() {
+      return (
+        <div className="single-recipe">
+          <div>
+            <Card>
+              <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
+              <CardBody>
+                <CardTitle>{this.props.label}</CardTitle>
 
+                <Button  onClick={() => this.props.recipeDetailCallback()}
+                  className="item__button">Recipe Details </Button>
 
-  render() {
-    return (
-      <div className="recipe-container">
-        <div className="item-list_container">
-          <h4>{this.props.label}</h4>
-          <img src={this.props.image} alt=''/>
-          <button  onClick={() => this.props.recipeDetailCallback()}>Recipe Details </button>
-          <button onClick={() => this.props.deleteRecipeCallback()
-            }>Delete Recipe</button>
+                <Button onClick={() => this.props.deleteRecipeCallback()
+                  }className="item__button"
+                  >Delete Recipe</Button>
 
+              </CardBody>
+            </Card>
           </div>
         </div>
       )

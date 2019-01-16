@@ -1,0 +1,15 @@
+.recipe-container {
+  border-style: solid;
+  border-color: red;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+/* .recipe-div {
+  border-style: solid;
+  border-color: orange;
+
+} */

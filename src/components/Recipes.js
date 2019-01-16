@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Recipe from './Recipe';
 import PropTypes from 'prop-types';
-
+import './Recipes.css'
 
 
 class Recipes extends Component {
@@ -22,10 +22,8 @@ class Recipes extends Component {
       });
 
       return(
-        <div>
-          <div className="recipe-container">
+        <div className="recipe-container">
             {RecipeList}
-          </div>
         </div>
       )
     }

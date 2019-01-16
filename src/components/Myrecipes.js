@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import Recipe from './Recipe';
 import PropTypes from 'prop-types';
 import Myrecipe from './Myrecipe'
+import './Myrecipes.css';
 
 class Myrecipes extends Component {
 
@@ -16,11 +17,8 @@ class Myrecipes extends Component {
       });
 
       return(
-
-        <div>
-        <div>
+        <div className="recipe-container">
         {RecipeList}
-        </div>
         </div>
       )
     }
