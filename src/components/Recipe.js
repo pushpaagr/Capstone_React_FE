@@ -20,7 +20,7 @@ import { Card, CardImg, CardBody,
           date,
           calendarvisible: false
         })
-      // console.log(date);
+      console.log(date);
 
       this.props.addRecipeActionCallback()
 
