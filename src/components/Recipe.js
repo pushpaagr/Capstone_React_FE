@@ -38,6 +38,9 @@ import { Card, CardImg, CardBody,
       // console.log(this.state.calendarvisible);
       if (!this.props.user) return null
 
+
+
+
       return (
         <div>
           <Button onClick={this.toggleCalendar}
@@ -54,6 +57,7 @@ import { Card, CardImg, CardBody,
     }
 
     render () {
+      const BASE_URL = "https://www.google.com/calendar/render?action=TEMPLATE&text=Your+Event+Name&dates=20140127T224000Z/20140320T221500Z&details=For+details,+link+here:+http://www.example.com&location=Waldorf+Astoria,+301+Park+Ave+,+New+York,+NY+10022&sf=true&output=xml "
       return(
         <div className="single-recipe">
           <Card>
@@ -69,6 +73,10 @@ import { Card, CardImg, CardBody,
               >
                 Recipe Details
               </Button>
+
+              <a href={BASE_URL}> click me </a>
+
+
             </CardBody>
           </Card>
         </div>

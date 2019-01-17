@@ -7,7 +7,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">MealTracker</h1>
         </header>
       <main>
         <Dashboard className="Dashboard"></Dashboard>
