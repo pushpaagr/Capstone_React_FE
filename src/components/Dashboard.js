@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase, { auth, provider } from '../firebase.js';
+import { auth, providerWithScope } from '../firebase.js';
 import axios from 'axios';
 import Carousel from './Carousel';
 import Recipes from './Recipes';
@@ -64,12 +64,14 @@ class Dashboard extends Component {
   }
 
   login() {
-    auth.signInWithPopup(provider)
+    // auth.signInWithPopup(provider)
+    auth.signInWithPopup(providerWithScope)
     .then((result) => {
       const user = result.user;
-      user.getIdToken().then((token)=> {
-        console.log(token);
-      })
+      // user.getIdToken().then((token)=> {
+      //   console.log(token);
+      // })
+      console.log(providerWithScope);
 
 
       this.setState({
