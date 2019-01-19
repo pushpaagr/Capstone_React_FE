@@ -164,7 +164,7 @@ class Dashboard extends Component {
         "end": {"date": "2019-1-18"},
         "start": {"date": "2019-1-18"}
       },
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization" : "Bearer ya29.GluWBoMjW940GfnmDfSLJ_RNybGaWAiUjHYMdaeJ-WedCvhETRo3Wa_IaasPwOhObDzxURheQBhnw5Z20UrU0hwvN0bU0wJoc-jrxf0XJjEdm6o_tOpUkNgk8r92" },})
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization" : "Bearer ya29.GlyXBiZ0jOOk9XrC1ynV97P2iz8PeJ5IbBszC39DgurwTNMTQ_mcERLkcf7ljiThUWgSmslP_9vnccE0-GHyu6qusB2vIkTcX73llQ9fKtG4aSKb-6pKWJc014fy5w" },})
 
       .then(function (response) {
         console.log(response);
