@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { auth, providerWithScope } from '../firebase.js';
+import { auth, provider } from '../firebase.js';
 import axios from 'axios';
 import Carousel from './Carousel';
 import Recipes from './Recipes';
 import Myrecipes from './Myrecipes';
 import Details from './Details';
 import './Dashboard.css';
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Navbar, Button, FormGroup, Alert, FormControl } from 'react-bootstrap';
+import { Navbar, Button, ButtonToolbar, Alert } from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -32,7 +32,6 @@ class Dashboard extends Component {
       showhome: false,
       indatabase: false,
       myaccountrecipedetail: false,
-      accesstoken: ""
     }
   }
 
@@ -45,13 +44,10 @@ class Dashboard extends Component {
       searchrecipe: true,
       myaccountrecipedetail: false,
     });
-    console.log("informsubit");
     this.searchRecipes();
   }
   handleChange = (event) => {
     this.setState({query: event.target.value});
-    console.log("in handle change ");
-    console.log(this.state.query);
   }
 
   componentDidMount() {
@@ -64,19 +60,11 @@ class Dashboard extends Component {
   }
 
   login() {
-    // auth.signInWithPopup(provider)
-    auth.signInWithPopup(providerWithScope)
+    auth.signInWithPopup(provider)
     .then((result) => {
       const user = result.user;
-      // user.getIdToken().then((token)=> {
-      //   console.log(token);
-      // })
-      console.log(providerWithScope);
-
-
       this.setState({
         user: user,
-        accesstoken: result.credential.accessToken,
         result: [],
         query: "",
         detailRecipe: "",
@@ -88,8 +76,6 @@ class Dashboard extends Component {
         myaccountrecipedetail: false,
 
       });
-
-      console.log(this.state.accesstoken);
     });
   }
 
@@ -241,49 +227,42 @@ class Dashboard extends Component {
         <div>
           <div className="div-outer-nav">
             <Navbar className="navbar-navbar">
-              <Navbar.Collapse>
-
-                <div className="navbarheader-outsideofnavbarheader">
-                  <Navbar.Header className="header">
-                    <Navbar.Brand>
-                      <a href="/">Meal Tracker</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                  </Navbar.Header>
-
-                  <Navbar.Form pullLeft>
-                    <FormGroup>
-                      <FormControl type="text" value={this.state.query} onChange={this.handleChange} placeholder="Recipe Search" />
-                    </FormGroup>{' '}
-                    <Button onClick={this.onFormSubmit} type="submit">Submit</Button>
-                  </Navbar.Form>
-
-                  <div>
-                    {this.state.user ?
-                      <Button onClick={this.logout}>Log Out</Button>
-                      :
-                      <Button onClick={this.login}>Log In</Button>
-                    }
-                  </div>
-
-                  <div>
-                    {this.state.user ?
-                      <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
-                      </Link></Button>
-                      :
-                      <p></p>
-                    }
-                  </div>
-
-                  <div>
-                    <Button onClick={this.showhome}><Link to="/">Home
-                    </Link></Button>
-                  </div>
-
+              <ButtonToolbar className="navbar-buttons">
+                <div>
+                  <form onSubmit={this.onFormSubmit}>
+                    <label>
+                      Search Recipes:
+                      <input type="text" value={this.state.query} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                  </form>
                 </div>
-              </Navbar.Collapse>
-
+                <div>
+                  {this.state.user ?
+                    <Button onClick={this.logout}>Log Out</Button>
+                    :
+                    <Button onClick={this.login}>Log In</Button>
+                  }
+                </div>
+                <div>
+                  {this.state.user ?
+                    <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
+                    </Link></Button>
+                    :
+                    <p></p>
+                  }
+                </div>
+                <div>
+                  <Button onClick={this.showhome}><Link to="/">Home
+                  </Link></Button>
+              </div>
+              </ButtonToolbar>
             </Navbar>
+
+
+
+
+
 
             <Alert  bsStyle="success">
               <p className={"status-bar__text"}>{this.state.message}</p>
