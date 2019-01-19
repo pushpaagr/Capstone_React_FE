@@ -8,7 +8,7 @@ import Details from './Details';
 import './Dashboard.css';
 // import { render } from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Navbar, Button, ButtonToolbar, Alert } from 'react-bootstrap';
+import { Navbar, Button, FormGroup, Alert, FormControl, } from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -252,42 +252,49 @@ class Dashboard extends Component {
           <div>
             <div className="div-outer-nav">
               <Navbar className="navbar-navbar">
-                <ButtonToolbar className="navbar-buttons">
-                  <div>
-                    <form onSubmit={this.onFormSubmit}>
-                      <label>
-                        Search Recipes:
-                        <input type="text" value={this.state.query} onChange={this.handleChange} />
-                      </label>
-                      <input type="submit" value="Submit" />
-                    </form>
-                  </div>
-                  <div>
-                    {this.state.user ?
-                      <Button onClick={this.logout}>Log Out</Button>
-                      :
-                      <Button onClick={this.login}>Log In</Button>
-                    }
-                  </div>
-                  <div>
-                    {this.state.user ?
-                      <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
+                <Navbar.Collapse>
+
+                  <div className="navbarheader-outsideofnavbarheader">
+                    <Navbar.Header className="header">
+                      <Navbar.Brand>
+                        <a href="/">Meal Tracker</a>
+                      </Navbar.Brand>
+                      <Navbar.Toggle />
+                    </Navbar.Header>
+
+                    <Navbar.Form pullLeft>
+                      <FormGroup>
+                        <FormControl type="text" value={this.state.query} onChange={this.handleChange} placeholder="Recipe Search" />
+                      </FormGroup>{' '}
+                      <Button onClick={this.onFormSubmit} type="submit">Submit</Button>
+                    </Navbar.Form>
+
+                    <div>
+                      {this.state.user ?
+                        <Button onClick={this.logout}>Log Out</Button>
+                        :
+                        <Button onClick={this.login}>Log In</Button>
+                      }
+                    </div>
+
+                    <div>
+                      {this.state.user ?
+                        <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
+                        </Link></Button>
+                        :
+                        <p></p>
+                      }
+                    </div>
+
+                    <div>
+                      <Button onClick={this.showhome}><Link to="/">Home
                       </Link></Button>
-                      :
-                      <p></p>
-                    }
+                    </div>
+
                   </div>
-                  <div>
-                    <Button onClick={this.showhome}><Link to="/">Home
-                    </Link></Button>
-                  </div>
-                </ButtonToolbar>
+                </Navbar.Collapse>
+
               </Navbar>
-
-
-
-
-
 
               <Alert  bsStyle="success">
                 <p className={"status-bar__text"}>{this.state.message}</p>
