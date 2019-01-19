@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import firebase, { auth, provider } from '../firebase.js';
+import { auth, provider } from '../firebase.js';
 import axios from 'axios';
 import Carousel from './Carousel';
 import Recipes from './Recipes';
 import Myrecipes from './Myrecipes';
 import Details from './Details';
 import './Dashboard.css';
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Navbar, Button, ButtonToolbar, Alert } from 'react-bootstrap';
+import { Navbar, Button, FormGroup, Alert, FormControl, } from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -32,6 +32,7 @@ class Dashboard extends Component {
       showhome: false,
       indatabase: false,
       myaccountrecipedetail: false,
+      accesstoken: ""
     }
   }
 
@@ -63,6 +64,8 @@ class Dashboard extends Component {
     auth.signInWithPopup(provider)
     .then((result) => {
       const user = result.user;
+      console.log('result', result);
+      console.log('user', user);
       this.setState({
         user: user,
         result: [],
@@ -74,8 +77,10 @@ class Dashboard extends Component {
         showhome: true,
         indatabase: false,
         myaccountrecipedetail: false,
-
+        accesstoken: result.credential.accessToken,
       });
+      console.log(this.state.accesstoken);
+      console.log(result);
     });
   }
 
@@ -149,158 +154,185 @@ class Dashboard extends Component {
       });
     });
 
-  };
 
 
+    axios.request ({
+      url: 'https://www.googleapis.com/calendar/v3/calendars/pushpaagr108%40gmail.com/events',
+      method: 'post',
+      data: {
+        "summary": "from REACT",
+        "end": {"date": "2019-1-18"},
+        "start": {"date": "2019-1-18"}
+      },
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization" : "Bearer ya29.GlyXBiZ0jOOk9XrC1ynV97P2iz8PeJ5IbBszC39DgurwTNMTQ_mcERLkcf7ljiThUWgSmslP_9vnccE0-GHyu6qusB2vIkTcX73llQ9fKtG4aSKb-6pKWJc014fy5w" },})
 
-
-  deleteRecipe = (recipe) => {
-
-    let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
-
-    axios.delete(url)
-    .then((response) => {
-      this.setState({
-        message: `Successfully delted ${recipe.label}`,
-        result: [],
+      .then(function (response) {
+        console.log(response);
       })
-    })
-    .catch((error) => {
-      this.setState({
-        error: error,
+      .catch(function (error) {
+        console.log(error);
       });
-    });
-
-  }
 
 
+    };
 
 
-  myrecipes = () => {
 
-    const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
-    axios.get(url)
-    .then((response) => {
-      this.setState({
-        result: response.data,
-        myrecipe: true,
-        seedetail: false,
-        searchrecipe: false,
-        showhome: false,
-        myaccountrecipedetail: true,
+
+    deleteRecipe = (recipe) => {
+
+      let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
+
+      axios.delete(url)
+      .then((response) => {
+        this.setState({
+          message: `Successfully delted ${recipe.label}`,
+          result: [],
+        })
       })
-    })
-    .catch((error) => {
-      this.setState({
-        error
+      .catch((error) => {
+        this.setState({
+          error: error,
+        });
       });
-    })
-  }
-
-  recipeDetail = (recipe) => {
-    this.setState({
-      detailRecipe: recipe,
-      seedetail: true,
-      result: [],
-      showhome: false,
-      myrecipe: false,
-
-    })
-  }
-
-  showhome = () => {
-    this.setState({
-      showhome: true,
-      message: "",
-      result: [],
-      query: "",
-      detailRecipe: "",
-      seedetail: false,
-      searchrecipe: false,
-      myrecipe: false,
-    })
-  }
-
-  render() {
-    return(
-      <Router>
-        <div>
-          <div className="div-outer-nav">
-            <Navbar className="navbar-navbar">
-              <ButtonToolbar className="navbar-buttons">
-                <div>
-                  <form onSubmit={this.onFormSubmit}>
-                    <label>
-                      Search Recipes:
-                      <input type="text" value={this.state.query} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                  </form>
-                </div>
-                <div>
-                  {this.state.user ?
-                    <Button onClick={this.logout}>Log Out</Button>
-                    :
-                    <Button onClick={this.login}>Log In</Button>
-                  }
-                </div>
-                <div>
-                  {this.state.user ?
-                    <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
-                    </Link></Button>
-                    :
-                    <p></p>
-                  }
-                </div>
-                <div>
-                  <Button onClick={this.showhome}><Link to="/">Home
-                  </Link></Button>
-              </div>
-              </ButtonToolbar>
-            </Navbar>
-
-
-
-
-
-
-            <Alert  bsStyle="success">
-              <p className={"status-bar__text"}>{this.state.message}</p>
-            </Alert>
-
-            {this.state.showhome ?   <Route path="/" exact component={Carousel} />: null}
-
-
-
-            {this.state.searchrecipe ? <Recipes
-              recipeList={this.state.result}
-              useruid={this.state.user ? this.state.user.uid : null}
-              recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
-              user={this.state.user}
-              addRecipeActionCallback={(recipe) => this.addRecipe(recipe)}
-              /> : null}
-
-
-              {this.state.myrecipe ?   <Route path="/myaccount/" render={() => <Myrecipes
-                myrecipes={this.state.result}
-                deleteRecipeCallback={(recipe) => this.deleteRecipe(recipe)}
-                recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
-                />} /> : null }
-
-                {this.state.seedetail ? <Details detailRecipe={this.state.detailRecipe}
-                user={this.state.user}
-                myrecipe={this.state.myrecipe}
-                indatabase={this.state.indatabase}
-                myaccountrecipedetail={this.state.myaccountrecipedetail}
-                addRecipeActionCallback={(recipe) => this.addRecipe(recipe)}
-                /> : null}
-              </div>
-            </div>
-          </Router>
-        )
-      }
-
 
     }
 
-    export default Dashboard;
+
+
+
+    myrecipes = () => {
+
+      const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
+      axios.get(url)
+      .then((response) => {
+        this.setState({
+          result: response.data,
+          myrecipe: true,
+          seedetail: false,
+          searchrecipe: false,
+          showhome: false,
+          myaccountrecipedetail: true,
+        })
+      })
+      .catch((error) => {
+        this.setState({
+          error
+        });
+      })
+    }
+
+    recipeDetail = (recipe) => {
+      this.setState({
+        detailRecipe: recipe,
+        seedetail: true,
+        result: [],
+        showhome: false,
+        myrecipe: false,
+
+      })
+    }
+
+    showhome = () => {
+      this.setState({
+        showhome: true,
+        message: "",
+        result: [],
+        query: "",
+        detailRecipe: "",
+        seedetail: false,
+        searchrecipe: false,
+        myrecipe: false,
+      })
+    }
+
+    render() {
+      return(
+        <Router>
+          <div>
+            <div className="div-outer-nav">
+              <Navbar className="navbar-navbar">
+                <Navbar.Collapse>
+
+                  <div className="navbarheader-outsideofnavbarheader">
+                    <Navbar.Header className="header">
+                      <Navbar.Brand>
+                        <a href="/">Meal Tracker</a>
+                      </Navbar.Brand>
+                      <Navbar.Toggle />
+                    </Navbar.Header>
+
+                    <Navbar.Form pullLeft>
+                      <FormGroup>
+                        <FormControl type="text" value={this.state.query} onChange={this.handleChange} placeholder="Recipe Search" />
+                      </FormGroup>{' '}
+                      <Button onClick={this.onFormSubmit} type="submit">Submit</Button>
+                    </Navbar.Form>
+
+                    <div>
+                      {this.state.user ?
+                        <Button onClick={this.logout}>Log Out</Button>
+                        :
+                        <Button onClick={this.login}>Log In</Button>
+                      }
+                    </div>
+
+                    <div>
+                      {this.state.user ?
+                        <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
+                        </Link></Button>
+                        :
+                        <p></p>
+                      }
+                    </div>
+
+                    <div>
+                      <Button onClick={this.showhome}><Link to="/">Home
+                      </Link></Button>
+                    </div>
+
+                  </div>
+                </Navbar.Collapse>
+
+              </Navbar>
+
+              <Alert  bsStyle="success">
+                <p className={"status-bar__text"}>{this.state.message}</p>
+              </Alert>
+
+              {this.state.showhome ?   <Route path="/" exact component={Carousel} />: null}
+
+
+
+              {this.state.searchrecipe ? <Recipes
+                recipeList={this.state.result}
+                useruid={this.state.user ? this.state.user.uid : null}
+                recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
+                user={this.state.user}
+                addRecipeActionCallback={(recipe) => this.addRecipe(recipe)}
+                /> : null}
+
+
+                {this.state.myrecipe ?   <Route path="/myaccount/" render={() => <Myrecipes
+                  myrecipes={this.state.result}
+                  deleteRecipeCallback={(recipe) => this.deleteRecipe(recipe)}
+                  recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
+                  />} /> : null }
+
+                  {this.state.seedetail ? <Details detailRecipe={this.state.detailRecipe}
+                  user={this.state.user}
+                  myrecipe={this.state.myrecipe}
+                  indatabase={this.state.indatabase}
+                  myaccountrecipedetail={this.state.myaccountrecipedetail}
+                  addRecipeActionCallback={(recipe) => this.addRecipe(recipe)}
+                  /> : null}
+                </div>
+              </div>
+            </Router>
+          )
+        }
+
+
+      }
+
+      export default Dashboard;

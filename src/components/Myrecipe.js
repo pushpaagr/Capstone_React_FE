@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardImg, CardBody,
+  CardTitle, Button } from 'reactstrap';
   import "./Myrecipe.css";
 
   class Myrecipe extends Component {

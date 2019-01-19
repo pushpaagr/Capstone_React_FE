@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Recipe from './Recipe';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Myrecipe from './Myrecipe'
 import './Myrecipes.css';
 
