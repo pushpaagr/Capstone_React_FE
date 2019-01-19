@@ -32,6 +32,7 @@ class Dashboard extends Component {
       showhome: false,
       indatabase: false,
       myaccountrecipedetail: false,
+      accesstoken: ""
     }
   }
 
@@ -63,6 +64,8 @@ class Dashboard extends Component {
     auth.signInWithPopup(provider)
     .then((result) => {
       const user = result.user;
+      console.log('result', result);
+      console.log('user', user);
       this.setState({
         user: user,
         result: [],
@@ -74,8 +77,10 @@ class Dashboard extends Component {
         showhome: true,
         indatabase: false,
         myaccountrecipedetail: false,
-
+        accesstoken: result.credential.accessToken,
       });
+      console.log(this.state.accesstoken);
+      console.log(result);
     });
   }
 
