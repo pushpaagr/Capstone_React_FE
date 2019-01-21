@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import "./Recipe.css";
-// import axios from 'axios';
 import { Card, CardImg, CardBody,
   CardTitle, Button } from 'reactstrap';
   import Calendar from 'react-calendar';
 
-  // onClick={this.props.addRecipeActionCallback}
 
   class Recipe extends Component {
 
@@ -16,37 +14,31 @@ import { Card, CardImg, CardBody,
     }
 
     onChange = date => {
-      this.setState({
-        date,
-        calendarvisible: false
-      })
-
-      console.log(date);
-
-
       const newdate = new Date(date);
       const year=newdate.getFullYear();
-      const month=newdate.getMonth()+1 //getMonth is zero based;
+      const month=newdate.getMonth()+1
       const day=newdate.getDate();
       const formatted=year+"-"+month+"-"+day;
 
       console.log(formatted);
 
+      // this.props.addDateActionCallback(formatted);
 
-      this.props.addRecipeActionCallback()
+      this.setState({
+        date: formatted,
+        calendarvisible: false
+      })
+      this.props.addRecipeActionCallback(formatted);
 
-      // do something with google calendar + date
     }
 
     toggleCalendar = () => {
-      // console.log("in toggle");
       this.setState({
         calendarvisible: !(this.state.calendarvisible),
       })
     }
 
     renderAddButton() {
-      // console.log(this.state.calendarvisible);
       if (!this.props.user) return null
 
       return (
@@ -56,10 +48,12 @@ import { Card, CardImg, CardBody,
             >
             Add
           </Button>
+
           {this.state.calendarvisible && <Calendar
             onChange={this.onChange}
             value={this.state.date}
             />}
+
           </div>
         )
       }

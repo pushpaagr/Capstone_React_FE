@@ -16,18 +16,17 @@ class Recipes extends Component {
         recipeDetailCallback={() => this.props.recipeDetailCallback(detailrecipe)}
         {...detailrecipe}
         user={this.props.user}
-        addRecipeActionCallback={() => this.props.addRecipeActionCallback(detailrecipe)}
-
+        addRecipeActionCallback={(formatedDate) => this.props.addRecipeActionCallback(formatedDate, detailrecipe)}
         />);
       });
 
       return(
+
         <div className="recipe-container">
-            {RecipeList}
+          {RecipeList}
         </div>
       )
     }
-
   }
 
   export default Recipes;

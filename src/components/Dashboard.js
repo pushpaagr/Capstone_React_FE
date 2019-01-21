@@ -6,10 +6,8 @@ import Recipes from './Recipes';
 import Myrecipes from './Myrecipes';
 import Details from './Details';
 import './Dashboard.css';
-// import { render } from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Navbar, Button, FormGroup, Alert, FormControl, } from 'react-bootstrap';
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
@@ -17,8 +15,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class Dashboard extends Component {
   constructor() {
     super();
-    this.login = this.login.bind(this); // <-- add this line
-    this.logout = this.logout.bind(this); // <-- add this line
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       message: "",
@@ -32,7 +30,9 @@ class Dashboard extends Component {
       showhome: false,
       indatabase: false,
       myaccountrecipedetail: false,
-      accesstoken: ""
+      accesstoken: "",
+      calendardate: "",
+      calendarDate: "",
     }
   }
 
@@ -80,7 +80,6 @@ class Dashboard extends Component {
         accesstoken: result.credential.accessToken,
       });
       console.log(this.state.accesstoken);
-      console.log(result);
     });
   }
 
@@ -100,7 +99,6 @@ class Dashboard extends Component {
         showhome: true,
         indatabase: false,
       });
-      console.log(this.state.message);
     });
   }
 
@@ -135,7 +133,10 @@ class Dashboard extends Component {
   };
 
 
-  addRecipe = (recipe) => {
+
+  addRecipe = (formatedDate, recipe) => {
+
+    console.log(this.state.user);
     let id = recipe.uri
     id = encodeURIComponent(id);
     let url = `http://localhost:8080/addrecipe?id=${id}&useruid=${this.state.user.uid}`
@@ -154,26 +155,26 @@ class Dashboard extends Component {
       });
     });
 
-
+    // console.log(`formated date: ${formatedDate}`)
+    // console.log(`access token: ${this.state.accesstoken}`);
 
     axios.request ({
-      url: 'https://www.googleapis.com/calendar/v3/calendars/pushpaagr108%40gmail.com/events',
+      url: `https://www.googleapis.com/calendar/v3/calendars/${this.state.user.email}/events`,
       method: 'post',
       data: {
-        "summary": "from REACT",
-        "end": {"date": "2019-1-18"},
-        "start": {"date": "2019-1-18"}
+        "summary": `Recipe: ${recipe.label} ${recipe.uri}`,
+        "end": {"date": `${formatedDate}`},
+        "start": {"date": `${formatedDate}`}
       },
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization" : "Bearer ya29.GlyXBiZ0jOOk9XrC1ynV97P2iz8PeJ5IbBszC39DgurwTNMTQ_mcERLkcf7ljiThUWgSmslP_9vnccE0-GHyu6qusB2vIkTcX73llQ9fKtG4aSKb-6pKWJc014fy5w" },})
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization" : `Bearer ${this.state.accesstoken}`},})
 
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
+        console.log("in error function of post request");
         console.log(error);
       });
-
-
     };
 
 
@@ -197,9 +198,6 @@ class Dashboard extends Component {
       });
 
     }
-
-
-
 
     myrecipes = () => {
 
@@ -258,6 +256,7 @@ class Dashboard extends Component {
                     <Navbar.Header className="header">
                       <Navbar.Brand>
                         <a href="/">Meal Tracker</a>
+                      {console.log(this.state.showhome)}
                       </Navbar.Brand>
                       <Navbar.Toggle />
                     </Navbar.Header>
@@ -309,7 +308,8 @@ class Dashboard extends Component {
                 useruid={this.state.user ? this.state.user.uid : null}
                 recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
                 user={this.state.user}
-                addRecipeActionCallback={(recipe) => this.addRecipe(recipe)}
+                addRecipeActionCallback={(formatedDate, recipe) => this.addRecipe(formatedDate, recipe)}
+
                 /> : null}
 
 
