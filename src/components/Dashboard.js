@@ -100,7 +100,7 @@ class Dashboard extends Component {
 
   searchRecipes = () => {
     const searchterm = this.state.query
-    const url = `http://localhost:8080/search?ingredients=${this.state.query}`
+    const url = `http://localhost:5000/search?ingredients=${this.state.query}`
 
     this.setState({
       result: [],
@@ -139,7 +139,7 @@ class Dashboard extends Component {
     console.log(recipe);
     let id = recipe.uri
     id = encodeURIComponent(id);
-    let url = `http://localhost:8080/addrecipe?id=${id}&useruid=${this.state.user.uid}`
+    let url = `http://localhost:5000/addrecipe?id=${id}&useruid=${this.state.user.uid}`
 
     axios.post(url)
     .then((response) => {
@@ -177,7 +177,7 @@ class Dashboard extends Component {
 
     deleteRecipe = (recipe) => {
 
-      let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
+      let url = `http://localhost:5000/recipe?documentid=${recipe.documentid}`
 
       axios.delete(url)
       .then((response) => {
@@ -196,7 +196,7 @@ class Dashboard extends Component {
 
     myrecipes = () => {
 
-      const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
+      const url = `http://localhost:5000/myrecipes?useruid=${this.state.user.uid}`
       axios.get(url)
       .then((response) => {
         this.setState({
