@@ -4,6 +4,7 @@ import "./Recipe.css";
 import { Card, CardImg, CardBody,
   CardTitle, Button } from 'reactstrap';
   import Calendar from 'react-calendar';
+  import { Link } from "react-router-dom";
 
 
   class Recipe extends Component {
@@ -20,9 +21,6 @@ import { Card, CardImg, CardBody,
       const day=newdate.getDate();
       const formatted=year+"-"+month+"-"+day;
 
-      console.log(formatted);
-
-      // this.props.addDateActionCallback(formatted);
 
       this.setState({
         date: formatted,
@@ -61,7 +59,7 @@ import { Card, CardImg, CardBody,
       render () {
         return(
           <div className="single-recipe">
-            <Card>
+            <Card className="Card-Card">
               <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
               <CardBody>
                 <CardTitle>{this.props.label}</CardTitle>
@@ -71,20 +69,19 @@ import { Card, CardImg, CardBody,
                 <Button
                   onClick={() => this.props.recipeDetailCallback()}
                   className="item__button"
-                  >
-                  Recipe Details
-                </Button>
-              </CardBody>
-            </Card>
-          </div>
-        )
-      }
-
+                  ><Link to="/details/">Recipe Details</Link>
+              </Button>
+            </CardBody>
+          </Card>
+        </div>
+      )
     }
-    Recipe.propTypes = {
-      label: PropTypes.string
 
-    };
+  }
+  Recipe.propTypes = {
+    label: PropTypes.string
+
+  };
 
 
-    export default Recipe;
+  export default Recipe;

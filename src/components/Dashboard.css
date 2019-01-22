@@ -26,3 +26,42 @@
 .navbarheader-outsideofnavbarheader {
   display: flex;
 }
+
+
+
+.home-login-account-button {
+  border-color: red;
+  display: flex;
+}
+
+
+
+
+.navbarheader-outsideofnavbarheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* .home-login-account-button {
+border-color: red;
+display: flex;
+} */
+
+
+.login-logout-button {
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
+.myaccount-button{
+  padding-top: 5px;
+  padding-right: 10px;
+
+}
+
+.home-button{
+  padding-top: 5px;
+  padding-right: 10px;
+}

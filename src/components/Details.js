@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
+
+
+
   class Details extends Component {
 
 
     render() {
+      console.log(this.props.detailRecipe);
       if (this.props.detailRecipe) {
         const ingredients = this.props.detailRecipe.ingredients.map((item, i) => {
           return (

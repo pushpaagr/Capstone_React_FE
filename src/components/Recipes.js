@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Recipe from './Recipe';
-import PropTypes from 'prop-types';
 import './Recipes.css'
 
 
