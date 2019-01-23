@@ -248,7 +248,7 @@ class Dashboard extends Component {
                   <div className="navbarheader-outsideofnavbarheader">
                     <Navbar.Header className="header">
                       <Navbar.Brand>
-                        <Link to="/">Meal Tracker</Link>
+                        <Link to="/Capstone_React_FE/">Meal Tracker</Link>
                       </Navbar.Brand>
                       <Navbar.Toggle />
                     </Navbar.Header>
@@ -256,7 +256,7 @@ class Dashboard extends Component {
                       <FormGroup>
                         <FormControl type="text" value={this.state.query} onChange={this.handleChange} placeholder="Recipe Search" />
                       </FormGroup>{' '}
-                      <Button onClick={this.onFormSubmit} type="submit"><Link to="/search/">
+                      <Button onClick={this.onFormSubmit} type="submit"><Link to="/Capstone_React_FE/search/">
                         Submit</Link>
                     </Button>
                   </Navbar.Form>
@@ -264,21 +264,21 @@ class Dashboard extends Component {
                   <div className="home-login-account-button">
                     <div className="login-logout-button">
                       {this.state.user ?
-                        <Button onClick={this.logout}><Link to="/">Log Out</Link></Button>
+                        <Button onClick={this.logout}><Link to="/Capstone_React_FE/">Log Out</Link></Button>
                         :
-                        <Button onClick={this.login}><Link to="/">Log In</Link></Button>
+                        <Button onClick={this.login}><Link to="/Capstone_React_FE/">Log In</Link></Button>
                       }
                     </div>
                     <div className="myaccount-button">
                       {this.state.user ?
-                        <Button onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
+                        <Button onClick={this.myrecipes}><Link to="/Capstone_React_FE/myaccount/" className="dashboard-link">My Account
                         </Link></Button>
                         :
                         null
                       }
                     </div>
                     <div className="home-button">
-                      <Button onClick={this.showhome}><Link to="/">Home</Link></Button>
+                      <Button onClick={this.showhome}><Link to="/Capstone_React_FE/">Home</Link></Button>
                     </div>
 
                   </div>

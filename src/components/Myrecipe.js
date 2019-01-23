@@ -21,11 +21,11 @@ import { Card, CardImg, CardBody,
 
                 <Button  onClick={() => this.props.recipeDetailCallback()}
                   className="item__button">
-                  <Link to="/details/">Recipe Details</Link></Button>
+                  <Link to="/Capstone_React_FE/details/">Recipe Details</Link></Button>
 
                   <Button onClick={() => this.props.deleteRecipeCallback()
                     }className="item__button">
-                    <Link to="/myaccount/">Delete Recipe</Link></Button>
+                    <Link to="/Capstone_React_FE/myaccount/">Delete Recipe</Link></Button>
                   </CardBody>
                 </Card>
             </div>

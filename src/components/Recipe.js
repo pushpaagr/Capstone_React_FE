@@ -69,7 +69,7 @@ import { Card, CardImg, CardBody,
                 <Button
                   onClick={() => this.props.recipeDetailCallback()}
                   className="item__button"
-                  ><Link to="/details/">Recipe Details</Link>
+                  ><Link to="/Capstone_React_FE/details/">Recipe Details</Link>
               </Button>
             </CardBody>
           </Card>
