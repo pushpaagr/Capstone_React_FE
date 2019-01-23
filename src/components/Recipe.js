@@ -41,11 +41,10 @@ import { Card, CardImg, CardBody,
 
       return (
         <div>
-          <Button onClick={this.toggleCalendar}
-            className="item__button"
+          <button className="btn btn-primary detailbutton" onClick={this.toggleCalendar}  
             >
             Add
-          </Button>
+          </button>
 
           {this.state.calendarvisible && <Calendar
             onChange={this.onChange}
@@ -58,7 +57,7 @@ import { Card, CardImg, CardBody,
 
       render () {
         return(
-          <div className="single-recipe">
+          <div className="col-12 col-sm-6 col-md-4 single-recipe">
             <Card className="Card-Card">
               <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
               <CardBody>
@@ -66,11 +65,10 @@ import { Card, CardImg, CardBody,
 
                 {this.renderAddButton()}
 
-                <Button
+                <button className="btn btn-primary detailbutton"
                   onClick={() => this.props.recipeDetailCallback()}
-                  className="item__button"
-                  ><Link to="/Capstone_React_FE/details/">Recipe Details</Link>
-              </Button>
+                  ><Link to="/details/">Recipe Details</Link>
+              </button>
             </CardBody>
           </Card>
         </div>

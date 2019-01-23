@@ -1,43 +1,41 @@
 
 .single-recipe {
-   border-style: solid;
-  border-color: green;
+   /* border-style: solid;
+  border-color: green; */
 }
 
-
-/* .Card-Card{
+.Card-Card{
   border: solid;
-  border-color: grey;
-} */
+  /* border-color: grey; */
+}
 
 
 
 .item__button {
   border-style: solid;
   border-color: blue;
-
 }
 
 
-/*
+
 .recipe-container {
-border-style: solid;
-border-color: red;
+/* border-style: solid;
+border-color: red; */
 padding: 25px 50px 75px 100px;
 
 }
 
 .item-list_container {
-border-style: solid;
-border-color: green;
+/* border-style: solid;
+border-color: green; */
 display: flex;
 
 }
 
 
 .search-card-div {
-border-style: solid;
-border-color: orange;
+/* border-style: solid;
+border-color: orange; */
 flex-direction: row;
 }
 
@@ -45,4 +43,4 @@ flex-direction: row;
 
 ul {
 list-style-type: none;
-} */
+}

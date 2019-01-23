@@ -3,6 +3,8 @@ import { Card, CardImg, CardBody,
   CardTitle, Button } from 'reactstrap';
   import "./Myrecipe.css";
 
+import 'bootstrap/dist/css/bootstrap.css';
+
   import { Link } from "react-router-dom";
   import PropTypes from 'prop-types';
 
@@ -13,20 +15,20 @@ import { Card, CardImg, CardBody,
 
     render() {
       return (
-        <div className="single-recipe">
-            <Card className="Card-Card">
-              <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
-              <CardBody>
-                <CardTitle>{this.props.label}</CardTitle>
+        <div className="col-12 col-md-6 col-lg-4 single-recipe">
+          <Card>
+            <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
+            <CardBody>
+              <CardTitle>{this.props.label}</CardTitle>
 
-                <Button  onClick={() => this.props.recipeDetailCallback()}
-                  className="item__button">
-                  <Link to="/Capstone_React_FE/details/">Recipe Details</Link></Button>
+              <button  onClick={() => this.props.recipeDetailCallback()}
+                className="btn btn-primary detailbutton">
+                <Link to="/details/">Recipe Details</Link></button>
 
-                  <Button onClick={() => this.props.deleteRecipeCallback()
-                    }className="item__button">
-                    <Link to="/Capstone_React_FE/myaccount/">Delete Recipe</Link></Button>
-                  </CardBody>
+                <button onClick={() => this.props.deleteRecipeCallback()
+                }className="btn btn-primary detailbutton">
+                  <Link to="/myaccount/">Delete Recipe</Link></button>
+                </CardBody>
                 </Card>
             </div>
           )

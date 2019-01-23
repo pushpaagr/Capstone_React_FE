@@ -23,6 +23,11 @@
 }  */
 
 
+.navbar-brand {
+  font-size: 30px;
+
+}
+
 .navbarheader-outsideofnavbarheader {
   display: flex;
 }
@@ -30,7 +35,7 @@
 
 
 .home-login-account-button {
-  border-color: red;
+  /* border-color: red; */
   display: flex;
 }
 

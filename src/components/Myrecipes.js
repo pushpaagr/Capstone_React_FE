@@ -17,7 +17,7 @@ class Myrecipes extends Component {
       });
 
       return(
-        <div className="recipe-container">
+        <div className="row recipe-container">
         {RecipeList}
         </div>
       )

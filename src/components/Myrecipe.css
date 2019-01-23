@@ -1,10 +1,17 @@
 .single-recipe {
+  padding-bottom: 20px;
 
-  /* border-color: black;
-  border: solid; */
 }
 
 
-.Card-Card{
-  border-color: grey;
+ .Card-Card{
+  /* border-color: grey; */
+}
+
+.detailbutton >a{
+  color: white;
+}
+
+.detailbutton {
+  background: cadetblue !important;
 }

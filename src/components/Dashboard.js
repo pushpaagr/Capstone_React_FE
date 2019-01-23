@@ -100,7 +100,7 @@ class Dashboard extends Component {
 
   searchRecipes = () => {
     const searchterm = this.state.query
-    const url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/search?ingredients=${this.state.query}`
+    const url = `http://localhost:8080/search?ingredients=${this.state.query}`
 
     this.setState({
       result: [],
@@ -133,10 +133,11 @@ class Dashboard extends Component {
 
 
   addRecipe = (formatedDate, recipe) => {
+
     console.log(recipe);
     let id = recipe.uri
     id = encodeURIComponent(id);
-    let url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/addrecipe?id=${id}&useruid=${this.state.user.uid}`
+    let url = `http://localhost:8080/addrecipe?id=${id}&useruid=${this.state.user.uid}`
 
     axios.post(url)
     .then((response) => {
@@ -152,11 +153,12 @@ class Dashboard extends Component {
       });
     });
 
+console.log(recipe.shareAs);
     axios.request ({
       url: `https://www.googleapis.com/calendar/v3/calendars/${this.state.user.email}/events`,
       method: 'post',
       data: {
-        "summary": `Recipe: ${recipe.label} ${recipe.uri}`,
+        "summary": `Recipe: ${recipe.label}: ${recipe.shareAs}`,
         "end": {"date": `${formatedDate}`},
         "start": {"date": `${formatedDate}`}
       },
@@ -174,8 +176,8 @@ class Dashboard extends Component {
 
     deleteRecipe = (recipe) => {
 
-      // let url = `http://localhost:5000/recipe?documentid=${recipe.documentid}`
-      let url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/recipe?documentid=${recipe.documentid}`
+      // let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
+      let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
 
 
       axios.delete(url)
@@ -195,7 +197,7 @@ class Dashboard extends Component {
 
     myrecipes = () => {
 
-      const url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/myrecipes?useruid=${this.state.user.uid}`
+      const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
       axios.get(url)
       .then((response) => {
         this.setState({
@@ -248,7 +250,7 @@ class Dashboard extends Component {
                   <div className="navbarheader-outsideofnavbarheader">
                     <Navbar.Header className="header">
                       <Navbar.Brand>
-                        <Link to="/Capstone_React_FE/">Meal Tracker</Link>
+                        <Link to="/">Meal Tracker</Link>
                       </Navbar.Brand>
                       <Navbar.Toggle />
                     </Navbar.Header>
@@ -256,7 +258,7 @@ class Dashboard extends Component {
                       <FormGroup>
                         <FormControl type="text" value={this.state.query} onChange={this.handleChange} placeholder="Recipe Search" />
                       </FormGroup>{' '}
-                      <Button onClick={this.onFormSubmit} type="submit"><Link to="/Capstone_React_FE/search/">
+                      <Button bsSize="large" onClick={this.onFormSubmit} type="submit"><Link to="/search/">
                         Submit</Link>
                     </Button>
                   </Navbar.Form>
@@ -264,21 +266,21 @@ class Dashboard extends Component {
                   <div className="home-login-account-button">
                     <div className="login-logout-button">
                       {this.state.user ?
-                        <Button onClick={this.logout}><Link to="/Capstone_React_FE/">Log Out</Link></Button>
+                        <Button bsSize="large" onClick={this.logout}><Link to="/">Log Out</Link></Button>
                         :
-                        <Button onClick={this.login}><Link to="/Capstone_React_FE/">Log In</Link></Button>
+                        <Button bsSize="large" onClick={this.login}><Link to="/">Log In</Link></Button>
                       }
                     </div>
                     <div className="myaccount-button">
                       {this.state.user ?
-                        <Button onClick={this.myrecipes}><Link to="/Capstone_React_FE/myaccount/" className="dashboard-link">My Account
+                        <Button bsSize="large" onClick={this.myrecipes}><Link to="/myaccount/" className="dashboard-link">My Account
                         </Link></Button>
                         :
                         null
                       }
                     </div>
                     <div className="home-button">
-                      <Button onClick={this.showhome}><Link to="/Capstone_React_FE/">Home</Link></Button>
+                      <Button bsSize="large" onClick={this.showhome}><Link to="/">Home</Link></Button>
                     </div>
 
                   </div>
@@ -293,14 +295,14 @@ class Dashboard extends Component {
 
 
             <div>
-              <Route path="/Capstone_React_FE/" exact component={Carousel} />
-              <Route path="/Capstone_React_FE/myaccount/" render={() => <Myrecipes
+              <Route path="/" exact component={Carousel} />
+              <Route path="/myaccount/" render={() => <Myrecipes
                   myrecipes={this.state.result}
                   deleteRecipeCallback={(recipe) => this.deleteRecipe(recipe)}
                   recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
                   />} />
 
-                <Route path="/Capstone_React_FE/search/" render={() => <Recipes
+                <Route path="/search/" render={() => <Recipes
                     recipeList={this.state.result}
                     useruid={this.state.user ? this.state.user.uid : null}
                     recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
@@ -309,7 +311,7 @@ class Dashboard extends Component {
                     />} />
                 </div>
 
-                <Route exact path="/Capstone_React_FE/details/" render={()=> <Details detailRecipe={this.state.detailRecipe}
+                <Route exact path="/details/" render={()=> <Details detailRecipe={this.state.detailRecipe}
                   user={this.state.user}
                   myrecipe={this.state.myrecipe}
                   indatabase={this.state.indatabase}
