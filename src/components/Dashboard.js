@@ -293,14 +293,14 @@ class Dashboard extends Component {
 
 
             <div>
-              <Route path="/" exact component={Carousel} />
-              <Route path="/myaccount/" render={() => <Myrecipes
+              <Route path="/Capstone_React_FE/" exact component={Carousel} />
+              <Route path="/Capstone_React_FE/myaccount/" render={() => <Myrecipes
                   myrecipes={this.state.result}
                   deleteRecipeCallback={(recipe) => this.deleteRecipe(recipe)}
                   recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
                   />} />
 
-                <Route path="/search/" render={() => <Recipes
+                <Route path="/Capstone_React_FE/search/" render={() => <Recipes
                     recipeList={this.state.result}
                     useruid={this.state.user ? this.state.user.uid : null}
                     recipeDetailCallback={(recipe) => this.recipeDetail(recipe)}
@@ -309,7 +309,7 @@ class Dashboard extends Component {
                     />} />
                 </div>
 
-                <Route exact path="/details/" render={()=> <Details detailRecipe={this.state.detailRecipe}
+                <Route exact path="/Capstone_React_FE/details/" render={()=> <Details detailRecipe={this.state.detailRecipe}
                   user={this.state.user}
                   myrecipe={this.state.myrecipe}
                   indatabase={this.state.indatabase}
