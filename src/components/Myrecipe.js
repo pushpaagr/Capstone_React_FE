@@ -3,7 +3,7 @@ import { Card, CardImg, CardBody,
   CardTitle, Button } from 'reactstrap';
   import "./Myrecipe.css";
 
-import 'bootstrap/dist/css/bootstrap.css';
+  import 'bootstrap/dist/css/bootstrap.css';
 
   import { Link } from "react-router-dom";
   import PropTypes from 'prop-types';
@@ -20,15 +20,15 @@ import 'bootstrap/dist/css/bootstrap.css';
             <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
             <CardBody>
               <CardTitle>{this.props.label}</CardTitle>
-              <button  onClick={() => this.props.recipeDetailCallback()}
-                className="btn btn-primary detailbutton">
-                <Link to="/details/">Recipe Details</Link></button>
+                <button  onClick={() => this.props.recipeDetailCallback()}
+                  className="btn btn-primary detailbutton">
+                  <Link to="/details/">Recipe Details</Link></button>
 
-                <button onClick={() => this.props.deleteRecipeCallback()
-                }className="btn btn-primary detailbutton">
-                  <Link to="/myaccount/">Delete Recipe</Link></button>
+                  <button onClick={() => this.props.deleteRecipeCallback()
+                  }className="btn btn-primary detailbutton">
+                    <Link to="/myaccount/">Delete Recipe</Link></button>
                 </CardBody>
-                </Card>
+              </Card>
             </div>
           )
         }
