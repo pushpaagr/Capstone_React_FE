@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/Capstone_React_FE/static/js/runtime~main.23c8edd4.js"
   },
   {
-    "revision": "6dce6bb74b9649861660",
-    "url": "/Capstone_React_FE/static/js/main.6dce6bb7.chunk.js"
+    "revision": "d54979595ed562d38aa5",
+    "url": "/Capstone_React_FE/static/js/main.d5497959.chunk.js"
   },
   {
     "revision": "21967870064f617d6f7d",
     "url": "/Capstone_React_FE/static/js/1.21967870.chunk.js"
   },
   {
-    "revision": "6dce6bb74b9649861660",
+    "revision": "d54979595ed562d38aa5",
     "url": "/Capstone_React_FE/static/css/main.22804b11.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/Capstone_React_FE/static/css/1.677ed98d.chunk.css"
   },
   {
-    "revision": "01bbff0373cadc485c56727646d0b2db",
+    "revision": "201ca677c9621395975af22329e97401",
     "url": "/Capstone_React_FE/index.html"
   }
 ];
