@@ -39,9 +39,6 @@ import { Card, CardImg, CardText, CardBody,
               <CardText  className="ingredientsText">{ingredients ? ingredients : "None"}</CardText>
               <CardSubtitle className="healthlabel">HealthLabel:</CardSubtitle>
               <CardText className="healthlabelText">{healthLabels}</CardText>
-              {((this.props.user && this.props.myaccountrecipedetail) || !(this.props.user)) ? null: <Button onClick={() => this.props.addRecipeActionCallback(this.props.detailRecipe)
-              }className="item__button"
-              >Add Recipe</Button> }
               <CardSubtitle className="recipeUrl">URL: <a href={this.props.detailRecipe.url} target="_blank">{this.props.detailRecipe.label}</a>
             </CardSubtitle>
           </CardBody>
