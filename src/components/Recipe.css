@@ -44,3 +44,8 @@ flex-direction: row;
 ul {
 list-style-type: none;
 }
+
+
+.recipe-add-detailbutton{
+  display: flex;
+}

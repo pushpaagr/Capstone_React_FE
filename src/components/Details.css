@@ -30,5 +30,5 @@ font-size: 20px;
 
 .detail-recipe{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }

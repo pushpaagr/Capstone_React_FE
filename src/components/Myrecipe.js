@@ -20,7 +20,6 @@ import 'bootstrap/dist/css/bootstrap.css';
             <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
             <CardBody>
               <CardTitle>{this.props.label}</CardTitle>
-
               <button  onClick={() => this.props.recipeDetailCallback()}
                 className="btn btn-primary detailbutton">
                 <Link to="/details/">Recipe Details</Link></button>

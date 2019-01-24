@@ -41,7 +41,7 @@ import { Card, CardImg, CardBody,
 
       return (
         <div>
-          <button className="btn btn-primary detailbutton" onClick={this.toggleCalendar}  
+          <button className="btn btn-primary detailbutton" onClick={this.toggleCalendar}
             >
             Add
           </button>
@@ -62,13 +62,13 @@ import { Card, CardImg, CardBody,
               <CardImg top width="100%" src={this.props.image} alt="Card image cap" />
               <CardBody>
                 <CardTitle>{this.props.label}</CardTitle>
-
-                {this.renderAddButton()}
-
-                <button className="btn btn-primary detailbutton"
-                  onClick={() => this.props.recipeDetailCallback()}
-                  ><Link to="/details/">Recipe Details</Link>
-              </button>
+                <div className="recipe-add-detailbutton">
+                  {this.renderAddButton()}
+                  <button className="btn btn-primary detailbutton"
+                    onClick={() => this.props.recipeDetailCallback()}
+                    ><Link to="/details/">Recipe Details</Link>
+                </button>
+              </div>
             </CardBody>
           </Card>
         </div>

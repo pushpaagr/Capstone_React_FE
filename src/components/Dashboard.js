@@ -184,7 +184,6 @@ console.log(recipe.shareAs);
       .then((response) => {
         this.setState({
           message: `Successfully delted ${recipe.label}`,
-          result: [],
         })
       })
       .catch((error) => {
@@ -193,10 +192,12 @@ console.log(recipe.shareAs);
         });
       });
 
+      this.myrecipes();
+
     }
 
     myrecipes = () => {
-
+console.log("in my recipes");
       const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
       axios.get(url)
       .then((response) => {
