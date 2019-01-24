@@ -100,7 +100,7 @@ class Dashboard extends Component {
 
   searchRecipes = () => {
     const searchterm = this.state.query
-    const url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/search?ingredients=${this.state.query}`
+    const url = `http://localhost:8080/search?ingredients=${this.state.query}`
 
     this.setState({
       result: [],
@@ -137,7 +137,7 @@ class Dashboard extends Component {
     console.log(recipe);
     let id = recipe.uri
     id = encodeURIComponent(id);
-    let url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/addrecipe?id=${id}&useruid=${this.state.user.uid}`
+    let url = `http://localhost:8080/addrecipe?id=${id}&useruid=${this.state.user.uid}`
 
     axios.post(url)
     .then((response) => {
@@ -176,8 +176,8 @@ console.log(recipe.shareAs);
 
     deleteRecipe = (recipe) => {
 
-      // let url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/recipe?documentid=${recipe.documentid}`
-      let url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/recipe?documentid=${recipe.documentid}`
+      // let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
+      let url = `http://localhost:8080/recipe?documentid=${recipe.documentid}`
 
 
       axios.delete(url)
@@ -198,7 +198,7 @@ console.log(recipe.shareAs);
 
     myrecipes = () => {
 console.log("in my recipes");
-      const url = `http://meal-tracker.us-west-2.elasticbeanstalk.com/myrecipes?useruid=${this.state.user.uid}`
+      const url = `http://localhost:8080/myrecipes?useruid=${this.state.user.uid}`
       axios.get(url)
       .then((response) => {
         this.setState({
